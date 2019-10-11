@@ -52,7 +52,12 @@ class Tooltip extends React.Component<Props, State> {
   renderedElement;
 
   toggleTooltip = () => {
-    const { onClose } = this.props;
+    const { onClose, onOpen } = this.props;
+    if (this.state.isVisible) {
+      onClose()
+    } else {
+      onOpen()
+    }
     this.getElementPosition();
     this.setState(prevState => {
       if (prevState.isVisible && !isIOS) {
@@ -243,8 +248,8 @@ Tooltip.defaultProps = {
   width: 150,
   containerStyle: {},
   backgroundColor: '#617080',
-  onClose: () => {},
-  onOpen: () => {},
+  onClose: () => { },
+  onOpen: () => { },
 };
 
 const styles = {
